@@ -1,15 +1,34 @@
 import abc
+import pymorphy2
+
+morph = pymorphy2.MorphAnalyzer()
 
 class Dialog:
-	def listen(self, text, response=True, **kwargs):
+	def __init__(self):
+		self.debug_mode = False
+
+	def first_verb(self, sents):
+		for t in sents:
+			if t[0].tag.POS in ( "VERB", "INFN" ):
+				return t[0]
+		return None
+
+	def first_noun(self, sents):
+		for t in sents:
+			if t[0].tag.POS == "NOUN":
+				return t[0]
+		return None
+
+	def input(self, text):
 		sents = self.parse(text)
-		reply, confidence = self.interpret(sents, **kwargs)
-		return reply, confidence
+		confidence = self.estimate(sents)
+		return confidence
 
-	@abc.abstractmethod
 	def parse(self, text):
-		return []
+		parr = []
+		for t in text.split():
+			parr.append(morph.parse(t))
+		return parr
 
-	@abc.abstractmethod
-	def interpret(self, sents, **kwargs):
-		return sents, 0.0, kwargs
+	def estimate(self, sents):
+		return 0.0

@@ -18,6 +18,11 @@ setup(
     author_email="netricks@protonmail.com",
     url="https://github.com/mirmik/semantic-terminal",
     classifiers=[],
+    package_data={
+        "semterm": [
+            "dialogs/*",
+        ]
+    },
     #package_data={"semterm": ["img/*"]},
     include_package_data=True,
     install_requires=[],
