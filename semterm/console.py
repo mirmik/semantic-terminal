@@ -3,5 +3,6 @@ class Console:
 		self.session = session
 
 	def repl(self):
-		inp = input()
-		self.session.input(inp.split())
+		while True:
+			inp = input()
+			self.session.input(inp.split())
