@@ -1,9 +1,10 @@
 import semterm.dialog
+import semterm.util as util
 import os
 
 class StarterDialog(semterm.dialog.Dialog):
 	trigger_list = [ "активировать", "запустить", "инициировать", "включить" ]
-	target_list = [ "терминал", "браузер" ]
+	target_list = [ "терминал", "браузер", "zencad", "lutris" ]
 
 	def __init__(self):
 		super().__init__()
@@ -31,3 +32,7 @@ class StarterDialog(semterm.dialog.Dialog):
 
 		if self.stash == "терминал": os.system("terminator &")
 		elif self.stash == "браузер": os.system("firefox &")
+		elif self.stash == "zencad": 
+			util.execute_with_terminal(cmd="zencad")
+		elif self.stash == "lutris": 
+			util.execute_with_terminal(cmd="WINEDEBUG=fixme-all lutris")

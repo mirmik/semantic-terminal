@@ -15,7 +15,8 @@ class Dialog:
 
 	def first_noun(self, sents):
 		for t in sents:
-			if t[0].tag.POS == "NOUN":
+			print(t[0].tag.__class__)
+			if t[0].tag == pymorphy2.tagset.OpencorporaTag('LATN') or t[0].tag.POS == "NOUN" :
 				return t[0]
 		return None
 
